@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const chalk = require("chalk")
+
+
+let tpl = null
+try {
+  tpl = require(`${__dirname}/../template`)
+} catch (err) {
+
+}
+
+if (!tpl) {
+  console.log(chalk.red('没有模版文件'))
+  return
+}
+console.log(tpl)

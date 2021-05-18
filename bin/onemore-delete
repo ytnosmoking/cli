@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+
+const inquirer = require('inquirer')
+const chalk = require('chalk')
+const fs = require('fs')
+
+let tpl = null
+try {
+  tpl = require(`${__dirname}/../template`)
+} catch (err) {
+
+}
+
+if (!tpl) {
+  console.log('没有模版文件')
+  return
+}
+const list = Object.keys(tpl).map((key, index) => ({ name: key, value: key }))
+if (list.length === 0) {
+  console.log(chalk.red('模版文件为空 没有可以删除的'))
+  return
+}
+
+let question = [
+  {
+    name: 'name',
+    type: 'list',
+
+    choices: list,
+    message: "请选择要删除的模板名称",
+    validate(val) {
+      if (!val) {
+        return '选择模版'
+      }
+      return true
+    }
+  }
+]
+
+inquirer
+  .prompt(question).then(answers => {
+    console.log(`answers`)
+    console.log(answers)
+    let { name } = answers;
+    // delete tplObj[name]
+    delete tpl[name]
+    // 更新 template.json 文件
+    fs.writeFile(`${__dirname}/../template.json`, JSON.stringify(tpl), 'utf-8', err => {
+      if (err) console.log(err)
+      console.log('\n')
+      console.log(chalk.green('Deleted successfully!\n'))
+      console.log(chalk.grey('The latest template list is: \n'))
+      console.log(tpl)
+      console.log('\n')
+    })
+  })

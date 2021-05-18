@@ -1,0 +1,27 @@
+{
+  "name": "onemore",
+  "version": "1.0.0",
+  "description": "a cli for init some projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "onemore": "bin/onemore",
+    "onemore-add":"bin/onemore-add",
+    "onemore-delete": "bin/onemore-delete",
+    "onemore-list": "bin/onemore-list"
+    
+
+  },
+  "keywords": ["cli", "vue", "react", "github", "onemore"],
+  "author": "yt <349915792@qq.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "commander": "^7.2.0",
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^8.0.0",
+    "ora": "^5.4.0"
+  }
+}

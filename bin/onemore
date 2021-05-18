@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+
+
+program.version(require('../package.json').version)
+  .usage('<command> [options]')
+  .command('add', 'add a new Template (添加新模版)')
+  .command('delete', 'delete a Template (删除模版)')
+  .command('list', 'list all Template (列出所有模版)')
+  .command('init', 'generate a new Project from a Template (生成项目)')
+
+program.parse(process.argv)

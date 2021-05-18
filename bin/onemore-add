@@ -1,0 +1,66 @@
+#!/usr/bin/env node
+
+const inquirer = require('inquirer')
+
+const chalk = require('chalk')
+
+const fs = require('fs')
+
+let tplObj = null;
+try {
+  tplObj = require(`${__dirname}/../template`)
+} catch (err) {
+  // console.log(err)
+  tplObj = {}
+}
+
+
+let question = [{
+  name: 'name',
+  type: 'input',
+  message: '输入模版名称',
+  validate(val) {
+    if (!val) {
+      return 'please enter a name first (????输入模版名称)'
+    }
+    if (tplObj && tplObj[val]) {
+      return 'have the same name (模版列表重名)'
+    }
+    return true
+  }
+}, {
+  name: "url",
+  type: "input",
+  message: '模版地址(git 项目名称)',
+  validate(val) {
+    const gbkReg = /[\u0000-\u0019]/
+    if (gbkReg.test(val)) {
+      return 'not support Chinese (还不支持中文的url 等我想想怎么搞)'
+    }
+    if (!val) {
+      return 'please enter a url (要地址啊 大佬)'
+    }
+    return true
+  }
+}]
+
+
+inquirer.prompt(question)
+  .then(answer => {
+    const { name, url } = answer
+    tplObj[name] = url
+    fs.writeFile(`${__dirname}/../template.json`, JSON.stringify(tplObj || {}), err => {
+      if (err) {
+        console.log(chalk.red('has sth wrong (大佬写入有错误啊。。。)'))
+        console.log(err)
+        return
+      }
+      console.log('\n')
+      console.log(chalk.green('Added Successfully! \n'))
+      console.log(chalk.grey('The latest template list is: \n'))
+      console.log(tplObj)
+      console.log('\n')
+
+    })
+
+  })

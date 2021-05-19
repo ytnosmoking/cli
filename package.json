@@ -8,15 +8,19 @@
   },
   "bin": {
     "onemore": "bin/onemore",
-    "onemore-add":"bin/onemore-add",
+    "onemore-add": "bin/onemore-add",
     "onemore-delete": "bin/onemore-delete",
-    "onemore-list": "bin/onemore-list"
-    
+    "onemore-list": "bin/onemore-list",
+    "onemore-init": "bin/onemore-init"
+  },
 
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ytnosmoking/cli"
   },
   "keywords": ["cli", "vue", "react", "github", "onemore"],
   "author": "yt <349915792@qq.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.1",
     "commander": "^7.2.0",

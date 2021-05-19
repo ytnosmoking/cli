@@ -1,5 +1,5 @@
 {
-  "name": "onemore",
+  "name": "onemore-cli",
   "version": "1.0.0",
   "description": "a cli for init some projects",
   "main": "index.js",
